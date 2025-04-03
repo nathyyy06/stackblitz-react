@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 //import reactLogo from './assets/react.svg';
 //import viteLogo from '/vite.svg';
 import './App.css';
+import { SignJWT } from 'jose';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -14,6 +15,15 @@ function App() {
       event.preventDefault();
       try {
           await signInWithEmailAndPassword(auth, email, senha);
+
+  const secretKey = new TextEncoder(). encode('MinhaChaveSecreta');
+  const token = await new SignJWT({user: 'admin'})
+    .setProtectedHeader({alg: 'HS256'})
+    .setIssuedAt()
+    .setExpirationTime('1h')
+    .sign(secretKey);
+
+    localStorage.setItem('token',token);
           alert("Login realizado com sucesso!");
       } catch (err) {
           alert("Erro ao autenticar: ", err);
