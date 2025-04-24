@@ -1,22 +1,23 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
+import { auth } from './config/firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 
-export default function Registra() {
+export default function Registrar() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const navigation = useNavigate()
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(auth, email, senha);
+      navigation('/login');
+    } catch (erro) {
+      alert('Erro ao cadastrar');
+    }
+  };
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        try {
-          await createUserWithEmailAndPassword(auth, email, senha);
-          navigation('/login');
-        } catch (erro) {
-          alert('Erro ao cadastrar');
-        }
-      };
-      
   return (
     <main>
       <h2>Registrar</h2>
@@ -36,8 +37,8 @@ export default function Registra() {
           required
         />
         <button type="submit">Registrar</button>
+
       </form>
     </main>
   );
-} ;
 }

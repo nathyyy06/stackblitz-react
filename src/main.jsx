@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './Home.jsx';
 import AuthMiddleware from './middleware/middleware.jsx';
-import Registra from './Registrar.jsx';
+import Registrar from './Registrar.jsx';
 import App from './App.jsx'; // <-- Adiciona isso aqui
 
 createRoot(document.getElementById('root')).render(
@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<Home />} />
         </Route>
         <Route path="/login" element={<App />} />
-        <Route path="/registrar" element={<Registra />} />
+        <Route path="/registrar" element={<Registrar />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

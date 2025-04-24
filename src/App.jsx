@@ -3,6 +3,7 @@ import { auth } from "./config/firebaseConfig.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { SignJWT } from 'jose';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -48,6 +49,7 @@ function App() {
               onChange={(e) => setSenha(e.target.value)}
             />
             <button type="submit">Entrar</button>
+            <Link to="/registrar" className='register-link'>Não tenho acesso</Link>
           </form>
         </>
       ) : (
